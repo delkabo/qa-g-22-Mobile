@@ -1,4 +1,4 @@
-package delkabo.com.tests;
+package delkabo.com.tests.browserstack;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
