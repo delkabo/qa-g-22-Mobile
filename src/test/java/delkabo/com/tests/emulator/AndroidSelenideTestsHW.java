@@ -84,8 +84,7 @@ public class AndroidSelenideTestsHW extends TestBase {
 
         step("Delete from Saved", () -> { //todo исправить
             $(AppiumBy.xpath("//android.widget.TextView[@text='Save']")).click();
-//            $(AppiumBy.className("android.widget.ListView"))
-            $(AppiumBy.xpath("android.widget.TextView[@text='Remove from Saved']")).click();
+            $(AppiumBy.xpath("//android.widget.TextView[@text='Remove from Saved']")).click();
         });
 
         step("Return to main page", () -> {
