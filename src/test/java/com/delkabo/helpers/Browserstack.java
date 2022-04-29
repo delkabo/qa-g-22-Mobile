@@ -1,4 +1,4 @@
-package delkabo.com.helpers;
+package com.delkabo.helpers;
 
 import static io.restassured.RestAssured.given;
 import static java.lang.String.format;

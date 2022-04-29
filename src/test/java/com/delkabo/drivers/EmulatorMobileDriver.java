@@ -1,12 +1,13 @@
-package delkabo.com.drivers;
+package com.delkabo.drivers;
 
 import com.codeborne.selenide.WebDriverProvider;
+import com.delkabo.config.ProjectConfig;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
 import io.appium.java_client.remote.AutomationName;
+import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.interactions.touch.TouchActions;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,16 +19,22 @@ import static org.apache.commons.io.FileUtils.copyInputStreamToFile;
 
 
 public class EmulatorMobileDriver implements WebDriverProvider {
-
     File app = getApp();
+
+    ProjectConfig configMy = ConfigFactory.create(ProjectConfig.class, System.getProperties());
 
     @Override
     public WebDriver createDriver(Capabilities capabilities) {
         UiAutomator2Options options = new UiAutomator2Options();
         options.merge(capabilities);
         options.setAutomationName(AutomationName.ANDROID_UIAUTOMATOR2);
-        options.setPlatformName("Android");
-//        options.setDeviceName("dce383e7");
+
+        if (configMy.deviceHost().equals("emulation") && configMy.deviceHost().equals("")) {
+            options.setPlatformName("Android");
+        } else if (configMy.deviceHost().equals("real")) {
+            options.setDeviceName("dce383e7");
+        }
+
         options.setDeviceName("Pixel_4_API_30");
         options.setPlatformVersion("11.0");
         options.setApp(app.getAbsolutePath());
@@ -49,7 +56,7 @@ public class EmulatorMobileDriver implements WebDriverProvider {
         }
     }
 
-    private  File getApp() {
+    private File getApp() {
         String appPath = "src/test/resources/apk/app-alpha-universal-release.apk";
         String appUrl = "https://github.com/wikimedia/apps-android-wikipedia/" +
                 "releases/download/latest/app-alpha-universal-release.apk?raw=true";
@@ -57,8 +64,7 @@ public class EmulatorMobileDriver implements WebDriverProvider {
         if (!app.exists()) {
             try (InputStream in = new URL(appUrl).openStream()) {
                 copyInputStreamToFile(in, app);
-            }
-            catch (IOException e) {
+            } catch (IOException e) {
                 throw new AssertionError("Failed to download apk", e);
             }
         }

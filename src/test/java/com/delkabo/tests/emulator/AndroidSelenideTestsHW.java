@@ -1,4 +1,4 @@
-package delkabo.com.tests.emulator;
+package com.delkabo.tests.emulator;
 
 
 import com.codeborne.selenide.Condition;
@@ -150,6 +150,7 @@ public class AndroidSelenideTestsHW extends TestBase {
             $(AppiumBy.xpath("//android.widget.FrameLayout[@content-desc='More']")).click();
             $(AppiumBy.id("org.wikipedia.alpha:id/main_drawer_login_button")).shouldHave(Condition.exist);
         });
+
 
     }
 }
