@@ -6,6 +6,7 @@ import io.appium.java_client.android.options.UiAutomator2Options;
 import io.appium.java_client.remote.AutomationName;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.interactions.touch.TouchActions;
 
 import java.io.File;
 import java.io.IOException;
@@ -37,6 +38,7 @@ public class EmulatorMobileDriver implements WebDriverProvider {
 
 
         return new AndroidDriver(getAppiumServerUrl(), options);
+
     }
 
     public static URL getAppiumServerUrl() {
