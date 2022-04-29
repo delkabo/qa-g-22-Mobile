@@ -22,6 +22,7 @@
 *.tar.gz
 *.rar
 *.iml
+*.apk
 
 # Project gen files
 .idea
